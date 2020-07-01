@@ -1,0 +1,730 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/18/2020 10:21:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REVENANT"
+  DTS:CreatorName="REVENANT\lucas"
+  DTS:DTSID="{211150E0-78B8-4510-92EF-876ECBE37DC5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.121"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{A20D0D4C-BFEA-4FB8-8692-FD7EBEF7A327}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\STAGE VENDEDOR"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{99AE19E0-AE60-4422-A693-298D5B0CC0B7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="STAGE VENDEDOR"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\STAGE VENDEDOR\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STAGE VENDEDOR\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\Data Conversion.Inputs[Data Conversion Input].Columns[SEXO EXTENSO]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="SEXO EXTENSO"
+                      lineageId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output].Columns[SEXO EXTENSO]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\STAGE VENDEDOR\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[STRING SEXO EXTENSO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[STRING SEXO EXTENSO]"
+                      name="STRING SEXO EXTENSO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output].Columns[SEXO EXTENSO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\STAGE VENDEDOR\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STAGE VENDEDOR\ST_VENDEDOR"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ST_VENDEDOR"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ST_VENDEDOR]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Connections[OleDbConnection]"
+                  connectionManagerID="{5327D20F-18F2-4431-9807-6C038BC59AC5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[REVENANT.COMERCIO_STAGE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].Columns[IDVENDEDOR]"
+                      cachedDataType="i4"
+                      cachedName="IDVENDEDOR"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[IDVENDEDOR]"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[IDVENDEDOR]" />
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].Columns[NOME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="NOME"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[NOME]"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[NOME]" />
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].Columns[ID_GERENTE]"
+                      cachedDataType="i4"
+                      cachedName="ID_GERENTE"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[IDGERENTE]"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[ID_GERENTE]" />
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].Columns[STRING SEXO EXTENSO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="STRING SEXO EXTENSO"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[SEXO]"
+                      lineageId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[STRING SEXO EXTENSO]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[IDVENDEDOR]"
+                      dataType="i4"
+                      name="IDVENDEDOR" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NOME" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SEXO" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input].ExternalColumns[IDGERENTE]"
+                      dataType="i4"
+                      name="IDGERENTE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\ST_VENDEDOR.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\ST_VENDEDOR.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\ST_VENDEDOR.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="TRATAMENTO SEXO EXTENSO"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Inputs[Derived Column Input].Columns[SEXO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SEXO"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[SEXO]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output].Columns[SEXO EXTENSO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output].Columns[SEXO EXTENSO]"
+                      name="SEXO EXTENSO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([FINDSTRING](#{Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[SEXO]},"M",1) != 0) ? "MASCULINO" : "FEMININO"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(FINDSTRING(SEXO,"M",1) != 0) ? "MASCULINO" : "FEMININO"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STAGE VENDEDOR\VENDEDOR"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="VENDEDOR"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[VENDEDOR]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        IDVENDEDOR, SEXO, NOME, ID_GERENTE
+FROM            VENDEDOR</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STAGE VENDEDOR\VENDEDOR.Connections[OleDbConnection]"
+                  connectionManagerID="{86558355-226C-427A-BCB7-0DD91663ECCD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[REVENANT.COMERCIO_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[IDVENDEDOR]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[IDVENDEDOR]"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[IDVENDEDOR]"
+                      name="IDVENDEDOR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[NOME]"
+                      length="30"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[NOME]"
+                      name="NOME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[SEXO]"
+                      length="1"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[SEXO]"
+                      name="SEXO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[ID_GERENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[ID_GERENTE]"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].Columns[ID_GERENTE]"
+                      name="ID_GERENTE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[IDVENDEDOR]"
+                      dataType="i4"
+                      name="IDVENDEDOR" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="NOME" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SEXO" />
+                    <externalMetadataColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output].ExternalColumns[ID_GERENTE]"
+                      dataType="i4"
+                      name="ID_GERENTE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[IDVENDEDOR]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[IDVENDEDOR]"
+                      name="IDVENDEDOR" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[NOME]"
+                      name="NOME" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[SEXO]"
+                      name="SEXO" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ID_GERENTE]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ID_GERENTE]"
+                      name="ID_GERENTE" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\STAGE VENDEDOR.Paths[Data Conversion Output]"
+              endId="Package\STAGE VENDEDOR\ST_VENDEDOR.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\STAGE VENDEDOR\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\STAGE VENDEDOR.Paths[Derived Column Output]"
+              endId="Package\STAGE VENDEDOR\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\STAGE VENDEDOR.Paths[OLE DB Source Output]"
+              endId="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\STAGE VENDEDOR\VENDEDOR.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE ST_VENDEDOR"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{49FB452C-B8FF-4CDA-A893-CA4270EA0AA4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE ST_VENDEDOR"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5327D20F-18F2-4431-9807-6C038BC59AC5}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ST_VENDEDOR" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restrição]"
+      DTS:CreationName=""
+      DTS:DTSID="{44281DE6-912C-46BA-9E30-10223013A910}"
+      DTS:From="Package\TRUNCATE ST_VENDEDOR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restrição"
+      DTS:To="Package\STAGE VENDEDOR" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,42"
+          Id="Package\TRUNCATE ST_VENDEDOR"
+          TopLeft="180,84" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\STAGE VENDEDOR"
+          TopLeft="553,86" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restrição]"
+          TopLeft="404,106">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="149,0"
+              Start="0,0"
+              End="141.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="141.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\STAGE VENDEDOR">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\STAGE VENDEDOR\VENDEDOR"
+          TopLeft="131,77" />
+        <NodeLayout
+          Size="244,42"
+          Id="Package\STAGE VENDEDOR\TRATAMENTO SEXO EXTENSO"
+          TopLeft="344,79" />
+        <EdgeLayout
+          Id="Package\STAGE VENDEDOR.Paths[OLE DB Source Output]"
+          TopLeft="272,99">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72,0"
+              Start="0,0"
+              End="64.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="161,42"
+          Id="Package\STAGE VENDEDOR\ST_VENDEDOR"
+          TopLeft="931,84" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\STAGE VENDEDOR\Data Conversion"
+          TopLeft="674,84" />
+        <EdgeLayout
+          Id="Package\STAGE VENDEDOR.Paths[Derived Column Output]"
+          TopLeft="588,102.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86,0"
+              Start="0,0"
+              End="78.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="78.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STAGE VENDEDOR.Paths[Data Conversion Output]"
+          TopLeft="835,105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96,0"
+              Start="0,0"
+              End="88.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\STAGE VENDEDOR\VENDEDOR">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\STAGE VENDEDOR\ST_VENDEDOR">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
